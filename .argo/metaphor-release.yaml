@@ -149,7 +149,7 @@ spec:
         #           value: 'set released macro chart for kubefirst - {{steps.get-release-version-from-rc.outputs.result}}'
         #         - name: nextChartVersion
         #           value: '{{steps.get-release-version-from-rc.outputs.result}}'
-#! fake metaphor cli
+        #! fake metaphor cli
         # - - name: pull-sign-commit-push-kubefirst
         #     templateRef:
         #       name: cwft-git-v2
@@ -189,7 +189,7 @@ spec:
         - - name: commit-bumped-version-
             templateRef:
               name: cwft-git-v2
-              template: pull-commit-push
+              template: pull-commit-sign-push
               clusterScope: true
             arguments:
               artifacts:
