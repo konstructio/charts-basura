@@ -28,7 +28,6 @@ jobs:
             --generate-name="${GITHUB_REPOSITORY_NAME_PART}-release-${GITHUB_SHA_SHORT}-" \
             -p appName="${GITHUB_REPOSITORY_NAME_PART}" \
             -p branch="${GITHUB_REF_NAME}" \
-            -p clusterName="mgmt-20-metaphor-com" \
             -p environment="production" \
             -p gitUrlNoProtocol="git@github.com:${GITHUB_REPOSITORY_OWNER_PART_SLUG}" \
             -p shortSha="${GITHUB_SHA_SHORT}" \

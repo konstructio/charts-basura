@@ -21,6 +21,7 @@ spec:
                   value: '{{workflow.parameters.branch}}'
                 - name: gitUrlNoProtocol
                   value: '{{workflow.parameters.gitUrlNoProtocol}}'
+
         - - name: get-macro-chart-version
             templateRef:
               name: cwft-helm-v2
@@ -32,7 +33,8 @@ spec:
                   from: '{{steps.checkout.outputs.artifacts.repo-source}}'
               parameters:
                 - name: gitopsSourceFile
-                  value: 'registry/{{workflow.parameters.clusterName}}/components/development/kubefirst.yaml' #hardcoded env
+                  value: 'registry/environments/{{inputs.parameters.environment}}/{{inputs.parameters.appName}}.yaml'
+
         - - name: set-environment-version-for-macro-chart
             templateRef:
               name: cwft-helm-v2
@@ -44,15 +46,16 @@ spec:
                   from: '{{steps.checkout.outputs.artifacts.repo-source}}'
               parameters:
                 - name: fullChartPath
-                  value: 'registry/{{workflow.parameters.clusterName}}/components/{{workflow.parameters.environment}}/kubefirst.yaml'
+                  value: 'registry/environments/{{inputs.parameters.environment}}/{{inputs.parameters.appName}}.yaml'
                 - name: chartVersion
                   value: '{{steps.get-macro-chart-version.outputs.result}}'
                 - name: environment
                   value: '{{workflow.parameters.environment}}'
+
         - - name: commit
             templateRef:
               name: cwft-git-v2
-              template: pull-commit-push
+              template: pull-commit-sign-push
               clusterScope: true
             arguments:
               artifacts:
