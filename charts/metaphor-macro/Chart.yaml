@@ -6,4 +6,4 @@ dependencies:
 description: metaphor macro helm chart
 name: metaphor-macro
 type: application
-version: 0.1.3
+version: 0.3.0
