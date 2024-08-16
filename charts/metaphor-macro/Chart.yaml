@@ -4,6 +4,6 @@ dependencies:
   repository: https://charts.konstruct.io
   version: 0.0.1
 description: metaphor macro helm chart
-name: metaphor
+name: metaphor-macro
 type: application
 version: 0.0.1
