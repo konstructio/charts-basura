@@ -1,6 +1,6 @@
 dependencies:
 - name: metaphor
   repository: https://charts.konstruct.io
-  version: 0.2.101-rc.3a23bb8
-digest: sha256:9c20e109af29c9cf0bca378ef6c6a13d149c91cbc20a6a43f3f600c65c20a042
-generated: "2024-08-17T02:14:10.021107168Z"
+  version: 0.2.101-rc.f6b02cc
+digest: sha256:b6243a58995645561c4cad5a61e9e4942dba953dbfa66d0db0bbe908635ff565
+generated: "2024-08-17T02:32:00.994850844Z"
