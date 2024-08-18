@@ -31,7 +31,7 @@ spec:
                   from: '{{steps.checkout.outputs.artifacts.repo-source}}'
               parameters:
                 - name: gitopsSourceFile
-                  value: 'registry/environments/{{inputs.parameters.environment}}/{{inputs.parameters.appName}}.yaml'
+                  value: 'registry/environments/{{workflow.parameters.environment}}/{{workflow.parameters.appName}}.yaml'
 
         - - name: get-release-version-from-rc
             templateRef:
