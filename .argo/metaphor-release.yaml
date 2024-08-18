@@ -57,7 +57,7 @@ spec:
                   from: '{{steps.checkout.outputs.artifacts.repo-source}}'
               parameters:
                 - name: chartDir
-                  value: 'charts/{{workflow.parameters.appName}}-macro'
+                  value: 'charts/metaphor-macro'
                 - name: chartVersion
                   value: '{{steps.get-release-version-from-rc.outputs.result}}'
 
@@ -114,7 +114,7 @@ spec:
                 - name: appName
                   value: 'charts'
                 - name: chartDir
-                  value: 'charts/{{workflow.parameters.appName}}-macro'
+                  value: 'charts/metaphor-macro'
 
         - - name: release-and-tag-main-with-notes
             templateRef:
@@ -201,7 +201,7 @@ spec:
                 - name: gitUrlNoProtocol
                   value: '{{workflow.parameters.gitUrlNoProtocol}}'
                 - name: commitMessage
-                  value: 'setting {{workflow.parameters.appName}} {{workflow.parameters.environment}} to chart version {{steps.get-macro-chart-version.outputs.result}}-rc.{{workflow.parameters.shortSha}}'
+                  value: 'setting metaphor {{workflow.parameters.environment}} to chart version {{steps.get-macro-chart-version.outputs.result}}-rc.{{workflow.parameters.shortSha}}'
 
 
         - - name: increment-chart-minor
@@ -217,7 +217,7 @@ spec:
                 - name: appName
                   value: '{{workflow.parameters.appName}}'
                 - name: chartDir
-                  value: 'charts/{{workflow.parameters.appName}}'
+                  value: 'charts/metaphor-macro'
                 - name: chartVersion
                   value: '{{steps.get-release-version-from-rc.outputs.result}}'
 
