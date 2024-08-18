@@ -2,8 +2,8 @@ apiVersion: v2
 dependencies:
 - name: metaphor
   repository: https://charts.konstruct.io
-  version: 0.2.101-rc.b8f0674
+  version: 0.2.101-rc.f1cf0a6
 description: metaphor macro helm chart
 name: metaphor-macro
 type: application
-version: 0.6.0-rc6
+version: 0.6.0-rc7
