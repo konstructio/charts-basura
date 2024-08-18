@@ -32,5 +32,5 @@ jobs:
             -p gitUrlNoProtocol="git@github.com:${GITHUB_REPOSITORY_OWNER_PART_SLUG}" \
             -p shortSha="${GITHUB_SHA_SHORT}" \
             -p gitopsSourceFile="registry/environments/staging/metaphor.yaml" \
-            -p gitopsDestinationFile"registry/environments/production/metaphor.yaml" \
+            -p gitopsDestinationFile="registry/environments/production/metaphor.yaml" \
             --wait --log
