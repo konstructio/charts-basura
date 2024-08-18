@@ -33,7 +33,7 @@ spec:
                   from: '{{steps.checkout.outputs.artifacts.repo-source}}'
               parameters:
                 - name: gitopsSourceFile
-                  value: 'registry/environments/{{inputs.parameters.environment}}/{{inputs.parameters.appName}}.yaml'
+                  value: '{{workflow.parameters.gitopsSourceFile}}'
 
         - - name: set-environment-version-for-macro-chart
             templateRef:
@@ -46,7 +46,7 @@ spec:
                   from: '{{steps.checkout.outputs.artifacts.repo-source}}'
               parameters:
                 - name: fullChartPath
-                  value: 'registry/environments/{{inputs.parameters.environment}}/{{inputs.parameters.appName}}.yaml'
+                  value: '{{workflow.parameters.gitopsDestinationFile}}'
                 - name: chartVersion
                   value: '{{steps.get-macro-chart-version.outputs.result}}'
                 - name: environment

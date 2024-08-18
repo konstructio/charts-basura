@@ -30,4 +30,6 @@ jobs:
             -p environment="staging" \
             -p gitUrlNoProtocol="git@github.com:${GITHUB_REPOSITORY_OWNER_PART_SLUG}" \
             -p shortSha="${GITHUB_SHA_SHORT}" \
+            -p gitopsSourceFile="registry/environments/development/metaphor.yaml"
+            -p gitopsDestinationFile"registry/environments/staging/metaphor.yaml"
             --wait --log
