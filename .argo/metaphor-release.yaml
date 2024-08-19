@@ -232,7 +232,7 @@ spec:
                   from: '{{steps.increment-chart-minor.outputs.artifacts.repo-source}}'
               parameters:
                 - name: repoName
-                  value: '{{workflow.parameters.appName}}'
+                  value: 'charts'
                 - name: gitUrlNoProtocol
                   value: '{{workflow.parameters.gitUrlNoProtocol}}'
                 - name: commitMessage
