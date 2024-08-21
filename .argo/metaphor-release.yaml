@@ -81,7 +81,7 @@ spec:
         - - name: commit-release-chart-increment
             templateRef:
               name: cwft-git-v2
-              template: pull-commit-sign-push
+              template: pull-commit-sign-push-charts-basura # todo: after migration remove -charts-basura suffix
               clusterScope: true
             arguments:
               artifacts:
