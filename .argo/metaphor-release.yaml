@@ -119,7 +119,7 @@ spec:
         - - name: release-and-tag-main-with-notes
             templateRef:
               name: cwft-git-v2
-              template: release-and-tag-main-with-notes
+              template: release-and-tag-main-with-notes-charts-basura
               clusterScope: true
             arguments:
               artifacts:
@@ -131,7 +131,7 @@ spec:
                 - name: appName
                   value: 'charts'
                 - name: tagName
-                  value: 'v{{steps.get-release-version-from-rc.outputs.result}}'
+                  value: 'metaphor-v{{steps.get-release-version-from-rc.outputs.result}}'
 
         # - - name: pull-sign-commit-push-gitops-template
         #     templateRef:
@@ -203,42 +203,44 @@ spec:
                 - name: commitMessage
                   value: 'setting metaphor {{workflow.parameters.environment}} to chart version {{steps.get-macro-chart-version.outputs.result}}-rc.{{workflow.parameters.shortSha}}'
 
+# note: these next 2 steps cause trouble in our flow because we shouldn't assume a minor version bump. it's far more common to patch release at kubefirst.
+# i think it's best to manage the chart bump manually and decicively for now.
 
-        - - name: increment-chart-minor
-            templateRef:
-              name: cwft-helm-v2
-              template: increment-chart-minor
-              clusterScope: true
-            arguments:
-              artifacts:
-                - name: repo-source
-                  from: '{{steps.commit-release-chart-increment.outputs.artifacts.repo-source}}'
-              parameters:
-                - name: appName
-                  value: '{{workflow.parameters.appName}}'
-                - name: chartDir
-                  value: 'charts/metaphor-macro'
-                - name: chartVersion
-                  value: '{{steps.get-release-version-from-rc.outputs.result}}'
+        # - - name: increment-chart-minor
+        #     templateRef:
+        #       name: cwft-helm-v2
+        #       template: increment-chart-minor
+        #       clusterScope: true
+        #     arguments:
+        #       artifacts:
+        #         - name: repo-source
+        #           from: '{{steps.commit-release-chart-increment.outputs.artifacts.repo-source}}'
+        #       parameters:
+        #         - name: appName
+        #           value: '{{workflow.parameters.appName}}'
+        #         - name: chartDir
+        #           value: 'charts/metaphor-macro'
+        #         - name: chartVersion
+        #           value: '{{steps.get-release-version-from-rc.outputs.result}}'
 
-        - - name: commit-bumped-version-
-            templateRef:
-              name: cwft-git-v2
-              template: pull-commit-sign-push
-              clusterScope: true
-            arguments:
-              artifacts:
-                - name: repo-source
-                  from: '{{steps.increment-chart-minor.outputs.artifacts.repo-source}}'
-              parameters:
-                - name: repoName
-                  value: 'charts'
-                - name: gitUrlNoProtocol
-                  value: '{{workflow.parameters.gitUrlNoProtocol}}'
-                - name: commitMessage
-                  # Please, be careful updating this message, it must comply with:
-                  # github skip ci rule: https://github.blog/changelog/2021-02-08-github-actions-skip-pull-request-and-push-workflows-with-skip-ci/
-                  # github skip ci rule: https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs
-                  # gitlab skip ci rule: https://devops.stackexchange.com/questions/6809/is-there-a-ci-skip-option-in-gitlab-ci
-                  # in case, the rule is disbaled or don't work this step will create a circular trigger of builds and bumps of version.
-                  value: "[skip ci] [CI SKIP] bumping {{workflow.parameters.appName}} chart to chart version {{steps.get-release-version-from-rc.outputs.result}}\n\nskip-checks:true"
+        # - - name: commit-bumped-version-
+        #     templateRef:
+        #       name: cwft-git-v2
+        #       template: pull-commit-sign-push
+        #       clusterScope: true
+        #     arguments:
+        #       artifacts:
+        #         - name: repo-source
+        #           from: '{{steps.increment-chart-minor.outputs.artifacts.repo-source}}'
+        #       parameters:
+        #         - name: repoName
+        #           value: 'charts'
+        #         - name: gitUrlNoProtocol
+        #           value: '{{workflow.parameters.gitUrlNoProtocol}}'
+        #         - name: commitMessage
+        #           # Please, be careful updating this message, it must comply with:
+        #           # github skip ci rule: https://github.blog/changelog/2021-02-08-github-actions-skip-pull-request-and-push-workflows-with-skip-ci/
+        #           # github skip ci rule: https://docs.github.com/en/actions/managing-workflow-runs/skipping-workflow-runs
+        #           # gitlab skip ci rule: https://devops.stackexchange.com/questions/6809/is-there-a-ci-skip-option-in-gitlab-ci
+        #           # in case, the rule is disbaled or don't work this step will create a circular trigger of builds and bumps of version.
+        #           value: "[skip ci] [CI SKIP] bumping {{workflow.parameters.appName}} chart to chart version {{steps.get-release-version-from-rc.outputs.result}}\n\nskip-checks:true"
