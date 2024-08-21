@@ -90,7 +90,7 @@ spec:
                   from: '{{steps.set-macro-chart-version.outputs.artifacts.repo-source}}'
               parameters:
                 - name: repoName
-                  value: 'charts-basura' # todo: change after migration
+                  value: 'charts'
                 - name: gitUrlNoProtocol
                   value: '{{workflow.parameters.gitUrlNoProtocol}}'
                 - name: commitMessage
